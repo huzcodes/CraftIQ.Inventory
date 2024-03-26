@@ -1,17 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 
-namespace CraftIQ.Inventory.Infrastructure.Data.Config
-{
-    public class InventoryConfiguration : IEntityTypeConfiguration<Core.Entities.Inventory>
-    {
-        public void Configure(EntityTypeBuilder<Core.Entities.Inventory> builder)
-        {
-            builder.Property(p => p.Id)
-                   .ValueGeneratedOnAdd();
+namespace CraftIQ.Inventory.Infrastructure.Data.Config;
 
-            builder.Property(p => p.Location)
-                   .HasMaxLength(200);
-        }
+public class InventoryConfiguration : IEntityTypeConfiguration<Core.Domains.DB.Inventory>
+{
+    public void Configure(EntityTypeBuilder<Core.Domains.DB.Inventory> builder)
+    {
+        builder.Property(p => p.Location)
+                .HasMaxLength(200);
     }
 }
+

@@ -1,24 +1,18 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
+using CraftIQ.Inventory.Core.Domains.DB;
 
-namespace CraftIQ.Inventory.Infrastructure.Data.Config
+namespace CraftIQ.Inventory.Infrastructure.Data.Config;
+
+public class OrderConfiguration : IEntityTypeConfiguration<Order>
 {
-
-    public class OrderConfiguration : IEntityTypeConfiguration<Core.Entities.Order>
-    {
-        public void Configure(EntityTypeBuilder<Core.Entities.Order> builder)
-        {
-            builder.Property(p => p.Id)
-                   .ValueGeneratedOnAdd();
-        }
-    }
-
-    public class OrderDetailConfiguration : IEntityTypeConfiguration<Core.Entities.OrderDetail>
-    {
-        public void Configure(EntityTypeBuilder<Core.Entities.OrderDetail> builder)
-        {
-            builder.Property(p => p.Id)
-                   .ValueGeneratedOnAdd();
-        }
-    }
+    public void Configure(EntityTypeBuilder<Order> builder)
+    { }
 }
+
+public class OrderDetailConfiguration : IEntityTypeConfiguration<OrderDetail>
+{
+    public void Configure(EntityTypeBuilder<OrderDetail> builder)
+    { }
+}
+
