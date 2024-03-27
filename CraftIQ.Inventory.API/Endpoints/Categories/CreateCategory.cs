@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CraftIQ.Inventory.API.Endpoints.Categories
 {
+    /// <summary>
+    /// huzcodes
+    /// </summary>
     public class CreateCategory : EndpointsAsync.WithRequest<CreateCategoryRequest>
                                                 .WithActionResult<CreateCategoryResponse>
     {
