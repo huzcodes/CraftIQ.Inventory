@@ -1,4 +1,5 @@
 using CraftIQ.Inventory.Infrastructure;
+using huzcodes.Extensions.Exceptions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +22,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// Register the exception handler extension
+app.AddExceptionHandlerExtension();
 
 app.UseAuthorization();
 
