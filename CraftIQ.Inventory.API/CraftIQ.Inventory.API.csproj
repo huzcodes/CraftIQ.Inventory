@@ -23,4 +23,8 @@
     <ProjectReference Include="..\CraftIQ.Inventory.Infrastructure\CraftIQ.Inventory.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Endpoints\Categories\" />
+  </ItemGroup>
+
 </Project>

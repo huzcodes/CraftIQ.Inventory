@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CraftIQ.Inventory.API", "CraftIQ.Inventory.API\CraftIQ.Inventory.API.csproj", "{CDD4F826-7946-4047-9B0F-380052414AF3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CraftIQ.Inventory.API", "CraftIQ.Inventory.API\CraftIQ.Inventory.API.csproj", "{CDD4F826-7946-4047-9B0F-380052414AF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CraftIQ.Inventory.Core", "CraftIQ.Inventory.Core\CraftIQ.Inventory.Core.csproj", "{408057C3-E482-4C60-8260-7F252320332F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CraftIQ.Inventory.Core", "CraftIQ.Inventory.Core\CraftIQ.Inventory.Core.csproj", "{408057C3-E482-4C60-8260-7F252320332F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CraftIQ.Inventory.Services", "CraftIQ.Inventory.Services\CraftIQ.Inventory.Services.csproj", "{490C0D53-DD30-4483-ACAC-E6E61FDEBAE7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CraftIQ.Inventory.Services", "CraftIQ.Inventory.Services\CraftIQ.Inventory.Services.csproj", "{490C0D53-DD30-4483-ACAC-E6E61FDEBAE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CraftIQ.Inventory.Infrastructure", "CraftIQ.Inventory.Infrastructure\CraftIQ.Inventory.Infrastructure.csproj", "{DC7F811F-B2A2-45AE-82A1-FE560F304C8D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CraftIQ.Inventory.Infrastructure", "CraftIQ.Inventory.Infrastructure\CraftIQ.Inventory.Infrastructure.csproj", "{DC7F811F-B2A2-45AE-82A1-FE560F304C8D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CraftIQ.Inventory.Shared", "CraftIQ.Inventory.Shared\CraftIQ.Inventory.Shared.csproj", "{ADCCD777-975B-4986-AE8B-801838DA461E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CraftIQ.Inventory.Shared", "CraftIQ.Inventory.Shared\CraftIQ.Inventory.Shared.csproj", "{ADCCD777-975B-4986-AE8B-801838DA461E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
