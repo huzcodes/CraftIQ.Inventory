@@ -1,4 +1,5 @@
 using CraftIQ.Inventory.Infrastructure;
+using huzcodes.Extensions.Exceptions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,7 @@ builder.Services.AddSwaggerGen();
 // adding db context registration
 var inventoryDbConnectionString = builder.Configuration.GetSection("ConnectionStrings:InventoryDbConnection");
 builder.Services.AddInventoryDbContext(inventoryDbConnectionString.Value!);
+builder.Services.AddInfrastructureRegistrations();
 
 var app = builder.Build();
 
@@ -20,6 +22,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// Register the exception handler extension
+app.AddExceptionHandlerExtension();
 
 app.UseAuthorization();
 

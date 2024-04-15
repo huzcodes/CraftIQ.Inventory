@@ -4,7 +4,7 @@
     {
         public class CategoriesRoutes
         {
-            public const string CreateCategory = "/category";
+            public const string Create = "/category";
         }
     }
 }
