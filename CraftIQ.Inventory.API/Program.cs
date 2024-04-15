@@ -11,6 +11,7 @@ builder.Services.AddSwaggerGen();
 // adding db context registration
 var inventoryDbConnectionString = builder.Configuration.GetSection("ConnectionStrings:InventoryDbConnection");
 builder.Services.AddInventoryDbContext(inventoryDbConnectionString.Value!);
+builder.Services.AddInfrastructureRegistrations();
 
 var app = builder.Build();
 
