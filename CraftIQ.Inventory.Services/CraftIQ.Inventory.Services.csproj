@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CraftIQ.Inventory.Core\CraftIQ.Inventory.Core.csproj" />
+  </ItemGroup>
+
 </Project>
