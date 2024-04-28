@@ -40,9 +40,4 @@
     <ProjectReference Include="..\CraftIQ.Inventory.Services\CraftIQ.Inventory.Services.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Endpoints\Categories\Update\" />
-    <Folder Include="Endpoints\Categories\Read\" />
-  </ItemGroup>
-
 </Project>
