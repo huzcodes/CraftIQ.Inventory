@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="huzcodes.Extensions" Version="1.2.0" />
+    <PackageReference Include="huzcodes.Persistence" Version="1.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CraftIQ.Inventory.Shared\CraftIQ.Inventory.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

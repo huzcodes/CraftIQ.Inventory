@@ -1,4 +1,4 @@
-﻿namespace CraftIQ.Inventory.Core.Entities
+﻿namespace CraftIQ.Inventory.Core.Entities.Categories
 {
     public class Category : BaseEntity
     {
@@ -9,7 +9,7 @@
         // relation with products
         public List<Product> Products { get; set; } = new();
 
-        public Category(){ } // for EF core
+        public Category() { } // for EF core
 
         public Category(string name, string description)
         {
@@ -20,6 +20,17 @@
             CreatedOn = DateTimeOffset.Now;
             ModifiedBy = Guid.Empty;
             ModifiedOn = DateTimeOffset.Now;
+        }
+
+        /// <summary>
+        /// Ctor used for coping in update
+        /// </summary>
+        public Category(string name, string description, Guid modifiedby)
+        {
+            Name = name;
+            Description = description;
+            ModifiedBy = modifiedby;
+            ModifiedOn= DateTimeOffset.Now;
         }
     }
 }
