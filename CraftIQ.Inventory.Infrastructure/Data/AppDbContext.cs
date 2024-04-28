@@ -1,4 +1,5 @@
 ﻿using CraftIQ.Inventory.Core.Entities;
+using CraftIQ.Inventory.Core.Entities.Categories;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
