@@ -25,7 +25,7 @@
         /// <summary>
         /// Ctor used for coping in update
         /// </summary>
-        public Category(string name, string description, Guid modifiedby)
+        public void UpdateCategory(string name, string description, Guid modifiedby)
         {
             Name = name;
             Description = description;

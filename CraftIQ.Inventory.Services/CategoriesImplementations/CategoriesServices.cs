@@ -71,10 +71,8 @@ namespace CraftIQ.Inventory.Services.CategoriesImplementations
             var oResult = await _repository.FirstOrDefaultAsync(oReadByIdSpec);
             if (oResult != null)
             {
-                var oData = new Category(contract.Name, contract.Description, Guid.NewGuid());
-                oData._CategoryId = oResult._CategoryId;
-                oData.Id = oResult.Id;
-                await _repository.UpdateAsync(oData);
+                oResult.UpdateCategory(contract.Name, contract.Description, Guid.NewGuid());
+                await _repository.UpdateAsync(oResult);
             }
 
             else throw new ResultException("This object is not exit", (int)HttpStatusCode.NotFound);
