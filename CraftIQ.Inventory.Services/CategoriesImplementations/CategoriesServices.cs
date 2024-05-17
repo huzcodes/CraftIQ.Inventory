@@ -12,7 +12,7 @@ namespace CraftIQ.Inventory.Services.CategoriesImplementations
     {
         private readonly IRepository<Category> _repository = repository;
 
-        public async ValueTask<TRequest> CreateCategory(TRequest contract)
+        public async ValueTask<TRequest> Create(TRequest contract)
         {
             var oContract = contract as CategoriesOperationsContract;
             var oData = new Category(oContract!.Name,
@@ -22,7 +22,7 @@ namespace CraftIQ.Inventory.Services.CategoriesImplementations
             return new CategoriesOperationsContract(oResult.Name,
                                                     oResult.Description) as dynamic;
         }
-        public async ValueTask<List<TResponse>> ReadCategories()
+        public async ValueTask<List<TResponse>> Read()
         {
             var oReadSpec = new ReadSpecification();
             var oData = await _repository.ListAsync(oReadSpec);
@@ -40,7 +40,7 @@ namespace CraftIQ.Inventory.Services.CategoriesImplementations
             else return new List<CategoriesContract>() as dynamic;
         }
 
-        public async ValueTask<TResponse> ReadCategoryById(Guid categoryId)
+        public async ValueTask<TResponse> ReadById(Guid categoryId)
         {
             var oReadByIdSpec = new ReadByIdSpecification(categoryId);
             var oResult = await _repository.FirstOrDefaultAsync(oReadByIdSpec);
@@ -55,7 +55,7 @@ namespace CraftIQ.Inventory.Services.CategoriesImplementations
 
             else throw new ResultException("This object is not exit", (int)HttpStatusCode.NotFound);
         }
-        public async ValueTask UpdateCategory(Guid categoryId, TRequest contract)
+        public async ValueTask Update(Guid categoryId, TRequest contract)
         {
             var oContract = contract as CategoriesOperationsContract;
             var oReadByIdSpec = new ReadByIdSpecification(categoryId);
@@ -70,7 +70,7 @@ namespace CraftIQ.Inventory.Services.CategoriesImplementations
         }
 
 
-        public async ValueTask DeleteCategory(Guid categoryId)
+        public async ValueTask Delete(Guid categoryId)
         {
             var oReadByIdSpec = new ReadByIdSpecification(categoryId);
             var oResult = await _repository.FirstOrDefaultAsync(oReadByIdSpec);

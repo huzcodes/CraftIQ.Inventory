@@ -12,7 +12,7 @@ namespace CraftIQ.Inventory.API.Endpoints.Categories.Delete
         [HttpDelete(Routes.CategoriesRoutes.Delete)]
         public override async Task<ActionResult> HandleAsync(CategoriesDeleteRequest request, CancellationToken cancellationToken = default)
         {
-            await _services.DeleteCategory(request.categoryId);
+            await _services.Delete(request.categoryId);
             return Ok("your object deleted successfully");
         }
     }

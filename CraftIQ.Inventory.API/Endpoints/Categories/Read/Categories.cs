@@ -13,7 +13,7 @@ namespace CraftIQ.Inventory.API.Endpoints.Categories.Read
         [HttpGet(Routes.CategoriesRoutes.BaseUrl)]
         public override async Task<ActionResult<ReadCategoriesResponse>> HandleAsync(CancellationToken cancellationToken = default)
         {
-            var oData = await _services.ReadCategories();
+            var oData = await _services.Read();
             var oResult = oData.Select(o => new ReadCategoriesResponse(o))
                                .ToList();
             return Ok(oResult);

@@ -21,7 +21,7 @@ namespace CraftIQ.Inventory.API.Endpoints.Categories.Create
                 throw new ResultException("request can't be null", (int)HttpStatusCode.BadRequest);
 
             var oData = new CategoriesOperationsContract(request.Name, request.Description);
-            var oResult = await _services.CreateCategory(oData);
+            var oResult = await _services.Create(oData);
             return Ok(new CreateCategoriesResponse(oResult.Name, oResult.Description));
         }
     }

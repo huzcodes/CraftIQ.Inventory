@@ -14,7 +14,7 @@ namespace CraftIQ.Inventory.API.Endpoints.Categories.Update
         public override async Task<ActionResult> HandleAsync(UpdateCategoriesRequest request, CancellationToken cancellationToken = default)
         {
             var oData = new CategoriesOperationsContract(request.Category.Name, request.Category.Description);
-            await _services.UpdateCategory(request.categoryId, oData);
+            await _services.Update(request.categoryId, oData);
             return Ok("your object has been updated");
         }
     }

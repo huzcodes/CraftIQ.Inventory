@@ -2,10 +2,10 @@
 {
     public interface IGenericServices<TRequest, TResponse>
     {
-        ValueTask<TRequest> CreateCategory(TRequest contract);
-        ValueTask<List<TResponse>> ReadCategories();
-        ValueTask<TResponse> ReadCategoryById(Guid categoryId);
-        ValueTask UpdateCategory(Guid categoryId, TRequest contract);
-        ValueTask DeleteCategory(Guid categoryId);
+        ValueTask<TRequest> Create(TRequest contract);
+        ValueTask<List<TResponse>> Read();
+        ValueTask<TResponse> ReadById(Guid categoryId);
+        ValueTask Update(Guid categoryId, TRequest contract);
+        ValueTask Delete(Guid categoryId);
     }
 }
