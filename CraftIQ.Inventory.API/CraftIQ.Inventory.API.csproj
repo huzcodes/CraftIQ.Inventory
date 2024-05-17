@@ -43,6 +43,9 @@
 
   <ItemGroup>
     <Folder Include="Endpoints\Products\Delete\" />
+    <Folder Include="Endpoints\Products\Delete\" />
+    <Folder Include="Endpoints\Products\Update\" />
+    <Folder Include="Endpoints\Products\Read\" />
     <Folder Include="Endpoints\Products\Update\" />
     <Folder Include="Endpoints\Products\Read\" />
   </ItemGroup>
