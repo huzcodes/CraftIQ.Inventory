@@ -1,6 +1,6 @@
-﻿using CraftIQ.Inventory.Core.Entities;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
+using CraftIQ.Inventory.Core.Entities.Categories;
 
 namespace CraftIQ.Inventory.Infrastructure.Data.Config
 {

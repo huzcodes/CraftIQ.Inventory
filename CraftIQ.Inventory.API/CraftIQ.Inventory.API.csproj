@@ -9,6 +9,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Endpoints\Categories\Deleting\**" />
+    <Compile Remove="Endpoints\Categories\Reading\**" />
+    <Compile Remove="Endpoints\Categories\Updating\**" />
+    <Content Remove="Endpoints\Categories\Deleting\**" />
+    <Content Remove="Endpoints\Categories\Reading\**" />
+    <Content Remove="Endpoints\Categories\Updating\**" />
+    <EmbeddedResource Remove="Endpoints\Categories\Deleting\**" />
+    <EmbeddedResource Remove="Endpoints\Categories\Reading\**" />
+    <EmbeddedResource Remove="Endpoints\Categories\Updating\**" />
+    <None Remove="Endpoints\Categories\Deleting\**" />
+    <None Remove="Endpoints\Categories\Reading\**" />
+    <None Remove="Endpoints\Categories\Updating\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="huzcodes.Endpoints" Version="1.1.0" />
     <PackageReference Include="huzcodes.Extensions" Version="1.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.3" />
@@ -17,11 +32,20 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CraftIQ.Inventory.Aspire\CraftIQ.Inventory.Aspire.ServiceDefaults\CraftIQ.Inventory.Aspire.ServiceDefaults.csproj" />
     <ProjectReference Include="..\CraftIQ.Inventory.Infrastructure\CraftIQ.Inventory.Infrastructure.csproj" />
+    <ProjectReference Include="..\CraftIQ.Inventory.Services\CraftIQ.Inventory.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Endpoints\Products\Delete\" />
+    <Folder Include="Endpoints\Products\Update\" />
+    <Folder Include="Endpoints\Products\Read\" />
   </ItemGroup>
 
 </Project>

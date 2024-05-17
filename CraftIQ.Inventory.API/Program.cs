@@ -1,7 +1,10 @@
 using CraftIQ.Inventory.Infrastructure;
+using CraftIQ.Inventory.Services;
 using huzcodes.Extensions.Exceptions;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.AddServiceDefaults();
 
 // Add services to the container.
 
@@ -13,8 +16,12 @@ builder.Services.AddSwaggerGen();
 var inventoryDbConnectionString = builder.Configuration.GetSection("ConnectionStrings:InventoryDbConnection");
 builder.Services.AddInventoryDbContext(inventoryDbConnectionString.Value!);
 builder.Services.AddInfrastructureRegistrations();
+builder.Services.AddServicesRegistrations();
+builder.Services.AddLogging();
 
 var app = builder.Build();
+
+app.MapDefaultEndpoints();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
