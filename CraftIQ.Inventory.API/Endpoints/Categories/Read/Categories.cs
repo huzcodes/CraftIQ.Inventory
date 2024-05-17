@@ -1,14 +1,14 @@
 ﻿using CraftIQ.Inventory.Core.Interfaces;
+using CraftIQ.Inventory.Shared.Contracts.Categories;
 using huzcodes.Endpoints.Abstractions;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 
 namespace CraftIQ.Inventory.API.Endpoints.Categories.Read
 {
-    public class Categories(ICategoriesServices services) : EndpointsAsync.WithoutRequest
-                                                                           .WithActionResult<ReadCategoriesResponse>
+    public class Categories(IGenericServices<dynamic, CategoriesContract> services) : EndpointsAsync.WithoutRequest
+                                                                                                          .WithActionResult<ReadCategoriesResponse>
     {
-        private readonly ICategoriesServices _services = services;
+        private readonly IGenericServices<dynamic, CategoriesContract> _services = services;
 
         [HttpGet(Routes.CategoriesRoutes.BaseUrl)]
         public override async Task<ActionResult<ReadCategoriesResponse>> HandleAsync(CancellationToken cancellationToken = default)

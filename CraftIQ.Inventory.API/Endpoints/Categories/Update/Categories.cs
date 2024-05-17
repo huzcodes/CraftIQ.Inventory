@@ -5,10 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CraftIQ.Inventory.API.Endpoints.Categories.Update
 {
-    public class Categories(ICategoriesServices services) : EndpointsAsync.WithRequest<UpdateCategoriesRequest>
-                                                                          .WithActionResult
+    public class Categories(IGenericServices<CategoriesOperationsContract, CategoriesContract> services) : EndpointsAsync.WithRequest<UpdateCategoriesRequest>
+                                                                                                                         .WithActionResult
     {
-        private readonly ICategoriesServices _services = services;
+        private readonly IGenericServices<CategoriesOperationsContract, CategoriesContract> _services = services;
 
         [HttpPut(Routes.CategoriesRoutes.Update)]
         public override async Task<ActionResult> HandleAsync(UpdateCategoriesRequest request, CancellationToken cancellationToken = default)

@@ -8,7 +8,7 @@ namespace CraftIQ.Inventory.Services
     {
         public static void AddServicesRegistrations(this IServiceCollection services)
         {
-            services.AddScoped<ICategoriesServices, CategoriesServices>();
+            services.AddScoped(typeof(IGenericServices<,>), typeof(CategoriesServices<,>));
         }
     }
 }

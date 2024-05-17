@@ -32,12 +32,20 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CraftIQ.Inventory.Aspire\CraftIQ.Inventory.Aspire.ServiceDefaults\CraftIQ.Inventory.Aspire.ServiceDefaults.csproj" />
     <ProjectReference Include="..\CraftIQ.Inventory.Infrastructure\CraftIQ.Inventory.Infrastructure.csproj" />
     <ProjectReference Include="..\CraftIQ.Inventory.Services\CraftIQ.Inventory.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Endpoints\Products\Delete\" />
+    <Folder Include="Endpoints\Products\Update\" />
+    <Folder Include="Endpoints\Products\Read\" />
   </ItemGroup>
 
 </Project>

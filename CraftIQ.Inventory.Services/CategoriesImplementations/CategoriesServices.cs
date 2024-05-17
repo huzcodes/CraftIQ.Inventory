@@ -8,30 +8,21 @@ using System.Net;
 
 namespace CraftIQ.Inventory.Services.CategoriesImplementations
 {
-    public class CategoriesServices(IRepository<Category> repository) : ICategoriesServices
+    public class CategoriesServices<TRequest, TResponse>(IRepository<Category> repository) : IGenericServices<TRequest, TResponse>
     {
         private readonly IRepository<Category> _repository = repository;
-        public async ValueTask<CategoriesOperationsContract> CreateCategory
-                                                       (CategoriesOperationsContract contract)
+
+        public async ValueTask<TRequest> CreateCategory(TRequest contract)
         {
-            var oData = new Category(contract.Name,
-                                     contract.Description);
+            var oContract = contract as CategoriesOperationsContract;
+            var oData = new Category(oContract!.Name,
+                                     oContract.Description);
             var oResult = await _repository.AddAsync(oData);
 
             return new CategoriesOperationsContract(oResult.Name,
-                                                    oResult.Description);
+                                                    oResult.Description) as dynamic;
         }
-
-        public async ValueTask DeleteCategory(Guid categoryId)
-        {
-            var oReadByIdSpec = new ReadByIdSpecification(categoryId);
-            var oResult = await _repository.FirstOrDefaultAsync(oReadByIdSpec);
-            if (oResult != null)
-                await _repository.DeleteAsync(oResult);
-            else throw new ResultException("You can't delete object that is not exit.", (int)HttpStatusCode.Forbidden);
-        }
-
-        public async ValueTask<List<CategoriesContract>> ReadCategories()
+        public async ValueTask<List<TResponse>> ReadCategories()
         {
             var oReadSpec = new ReadSpecification();
             var oData = await _repository.ListAsync(oReadSpec);
@@ -44,12 +35,12 @@ namespace CraftIQ.Inventory.Services.CategoriesImplementations
                                                                        o.ModifiedBy,
                                                                        o.CreatedOn,
                                                                        o.ModifiedOn)).ToList();
-                return oResult;
+                return oResult as dynamic;
             }
-            else return new List<CategoriesContract>();
+            else return new List<CategoriesContract>() as dynamic;
         }
 
-        public async ValueTask<CategoriesContract> ReadCategoryById(Guid categoryId)
+        public async ValueTask<TResponse> ReadCategoryById(Guid categoryId)
         {
             var oReadByIdSpec = new ReadByIdSpecification(categoryId);
             var oResult = await _repository.FirstOrDefaultAsync(oReadByIdSpec);
@@ -60,23 +51,32 @@ namespace CraftIQ.Inventory.Services.CategoriesImplementations
                                               oResult.CreatedBy,
                                               oResult.ModifiedBy,
                                               oResult.CreatedOn,
-                                              oResult.ModifiedOn);
+                                              oResult.ModifiedOn) as dynamic;
 
             else throw new ResultException("This object is not exit", (int)HttpStatusCode.NotFound);
         }
-
-        public async ValueTask UpdateCategory(Guid categoryId, CategoriesOperationsContract contract)
+        public async ValueTask UpdateCategory(Guid categoryId, TRequest contract)
         {
+            var oContract = contract as CategoriesOperationsContract;
             var oReadByIdSpec = new ReadByIdSpecification(categoryId);
             var oResult = await _repository.FirstOrDefaultAsync(oReadByIdSpec);
             if (oResult != null)
             {
-                oResult.UpdateCategory(contract.Name, contract.Description, Guid.NewGuid());
+                oResult.UpdateCategory(oContract!.Name, oContract.Description, Guid.NewGuid());
                 await _repository.UpdateAsync(oResult);
             }
 
             else throw new ResultException("This object is not exit", (int)HttpStatusCode.NotFound);
+        }
 
+
+        public async ValueTask DeleteCategory(Guid categoryId)
+        {
+            var oReadByIdSpec = new ReadByIdSpecification(categoryId);
+            var oResult = await _repository.FirstOrDefaultAsync(oReadByIdSpec);
+            if (oResult != null)
+                await _repository.DeleteAsync(oResult);
+            else throw new ResultException("You can't delete object that is not exit.", (int)HttpStatusCode.Forbidden);
         }
     }
 }
