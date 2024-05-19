@@ -1,4 +1,6 @@
-﻿namespace CraftIQ.Inventory.Core.Entities.Categories
+﻿using CraftIQ.Inventory.Core.Entities.Products;
+
+namespace CraftIQ.Inventory.Core.Entities.Categories
 {
     public class Category : BaseEntity
     {

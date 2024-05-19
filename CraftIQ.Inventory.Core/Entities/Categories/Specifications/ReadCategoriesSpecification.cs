@@ -2,9 +2,9 @@
 
 namespace CraftIQ.Inventory.Core.Entities.Categories.Specifications
 {
-    public class ReadSpecification : Specification<Category>
+    public class ReadCategoriesSpecification : Specification<Category>
     {
-        public ReadSpecification() 
+        public ReadCategoriesSpecification() 
         {
             Query.Where(o => o.Id != 0);
         }

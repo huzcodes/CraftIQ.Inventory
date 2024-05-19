@@ -24,7 +24,7 @@ namespace CraftIQ.Inventory.Services.CategoriesImplementations
         }
         public async ValueTask<List<TResponse>> Read()
         {
-            var oReadSpec = new ReadSpecification();
+            var oReadSpec = new ReadCategoriesSpecification();
             var oData = await _repository.ListAsync(oReadSpec);
             if (oData != null && oData.Count > 0)
             {
@@ -42,7 +42,7 @@ namespace CraftIQ.Inventory.Services.CategoriesImplementations
 
         public async ValueTask<TResponse> ReadById(Guid categoryId)
         {
-            var oReadByIdSpec = new ReadByIdSpecification(categoryId);
+            var oReadByIdSpec = new ReadCategoriesByIdSpecification(categoryId);
             var oResult = await _repository.FirstOrDefaultAsync(oReadByIdSpec);
             if (oResult != null)
                 return new CategoriesContract(oResult._CategoryId,
@@ -58,7 +58,7 @@ namespace CraftIQ.Inventory.Services.CategoriesImplementations
         public async ValueTask Update(Guid categoryId, TRequest contract)
         {
             var oContract = contract as CategoriesOperationsContract;
-            var oReadByIdSpec = new ReadByIdSpecification(categoryId);
+            var oReadByIdSpec = new ReadCategoriesByIdSpecification(categoryId);
             var oResult = await _repository.FirstOrDefaultAsync(oReadByIdSpec);
             if (oResult != null)
             {
@@ -72,7 +72,7 @@ namespace CraftIQ.Inventory.Services.CategoriesImplementations
 
         public async ValueTask Delete(Guid categoryId)
         {
-            var oReadByIdSpec = new ReadByIdSpecification(categoryId);
+            var oReadByIdSpec = new ReadCategoriesByIdSpecification(categoryId);
             var oResult = await _repository.FirstOrDefaultAsync(oReadByIdSpec);
             if (oResult != null)
                 await _repository.DeleteAsync(oResult);

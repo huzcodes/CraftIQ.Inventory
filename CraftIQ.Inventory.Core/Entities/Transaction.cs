@@ -1,4 +1,6 @@
-﻿namespace CraftIQ.Inventory.Core.Entities
+﻿using CraftIQ.Inventory.Core.Entities.Products;
+
+namespace CraftIQ.Inventory.Core.Entities
 {
     public class Transaction : BaseEntity
     {

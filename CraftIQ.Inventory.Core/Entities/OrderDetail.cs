@@ -1,4 +1,6 @@
-﻿namespace CraftIQ.Inventory.Core.Entities
+﻿using CraftIQ.Inventory.Core.Entities.Products;
+
+namespace CraftIQ.Inventory.Core.Entities
 {
     public class OrderDetail : BaseEntity
     {
@@ -12,6 +14,6 @@
 
         //relation with products
         public int ProductId { get; set; }
-        public Product Product { get; set; } = new();
+        public Product Product { get; set; } = null!;
     }
 }

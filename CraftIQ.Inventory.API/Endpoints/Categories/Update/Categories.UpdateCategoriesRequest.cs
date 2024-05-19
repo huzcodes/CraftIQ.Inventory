@@ -8,10 +8,10 @@ namespace CraftIQ.Inventory.API.Endpoints.Categories.Update
         [FromRoute]
         public Guid categoryId { get; set; }
         [FromBody]
-        public Body Category { get; set; } = new();
+        public CategoryBody Category { get; set; } = new();
     }
 
-    public class Body
+    public class CategoryBody
     {
         [Required]
         public string Name { get; set; } = string.Empty;

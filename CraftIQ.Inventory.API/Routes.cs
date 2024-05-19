@@ -24,5 +24,13 @@
             // GET baseUrl/Cars/{id}/Engines
             // GET baseUrl/Cars/{id}/Engines/{Id}
         }
+
+        public class ProductsRoutes
+        {
+            public const string BaseUrl = "/products";
+            public const string ReadById = BaseUrl + "/{productId}";
+            public const string Update = BaseUrl + "/{productId}";
+            public const string Delete = BaseUrl + "/{productId}";
+        }
     }
 }
