@@ -9,6 +9,8 @@ namespace CraftIQ.Inventory.API.Endpoints.Products.Delete
                                                                                                         .WithActionResult
     {
         private readonly InventoryFactory<DeleteProductRequest, ActionResult> _factory = factory;
+
+        [HttpDelete(Routes.ProductsRoutes.Delete)]
         public override async Task<ActionResult> HandleAsync(DeleteProductRequest request, CancellationToken cancellationToken = default)
         {
             var service = _factory.Build(nameof(Product));

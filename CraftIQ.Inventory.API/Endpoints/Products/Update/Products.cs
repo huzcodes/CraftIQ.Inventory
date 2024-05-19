@@ -2,6 +2,7 @@
 using CraftIQ.Inventory.Services.Factories;
 using CraftIQ.Inventory.Shared.Contracts.Products;
 using huzcodes.Endpoints.Abstractions;
+using huzcodes.Endpoints.Attributes;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CraftIQ.Inventory.API.Endpoints.Products.Update
@@ -12,7 +13,7 @@ namespace CraftIQ.Inventory.API.Endpoints.Products.Update
         private readonly InventoryFactory<ProductsOperationsContract, dynamic> _factory = factory;
 
         [HttpPut(Routes.ProductsRoutes.Update)]
-        public override async Task<ActionResult> HandleAsync(UpdateProductsRequest request, CancellationToken cancellationToken = default)
+        public override async Task<ActionResult> HandleAsync([FromMultiSource]UpdateProductsRequest request, CancellationToken cancellationToken = default)
         {
             var service = _factory.Build(nameof(Product));
             var oData = new ProductsOperationsContract(request.productId,

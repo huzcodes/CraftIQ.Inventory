@@ -4,8 +4,11 @@
     {
         ValueTask<TRequest> Create(TRequest contract);
         ValueTask<List<TResponse>> Read();
-        ValueTask<TResponse> ReadById(Guid categoryId);
-        ValueTask Update(Guid categoryId, TRequest contract);
-        ValueTask Delete(Guid categoryId);
+        ValueTask<List<TResponse>> ReadByParentId(Guid parentContractId);
+        ValueTask<TResponse> ReadById(Guid contractId);
+        ValueTask<TResponse> ReadSingleByParentId(Guid contractId, Guid parentContractId);
+        ValueTask Update(Guid contractId, TRequest contract);
+        ValueTask UpdateParentId(Guid contractId, Guid parentContractId);
+        ValueTask Delete(Guid contractId);
     }
 }

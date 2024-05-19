@@ -78,5 +78,14 @@ namespace CraftIQ.Inventory.Services.CategoriesImplementations
                 await _repository.DeleteAsync(oResult);
             else throw new ResultException("You can't delete object that is not exit.", (int)HttpStatusCode.Forbidden);
         }
+
+        public ValueTask<List<TResponse>> ReadByParentId(Guid parentContractId) =>
+            throw new NotImplementedException();
+
+        public ValueTask<TResponse> ReadSingleByParentId(Guid contractId, Guid parentContractId) =>
+            throw new NotImplementedException();
+
+        public ValueTask UpdateParentId(Guid contractId, Guid parentContractId) =>
+            throw new NotImplementedException();
     }
 }

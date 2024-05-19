@@ -3,7 +3,6 @@ using CraftIQ.Inventory.Core.Entities.Categories.Specifications;
 using CraftIQ.Inventory.Core.Entities.Products;
 using CraftIQ.Inventory.Core.Entities.Products.Specifications;
 using CraftIQ.Inventory.Core.Interfaces;
-using CraftIQ.Inventory.Shared.Contracts.Categories;
 using CraftIQ.Inventory.Shared.Contracts.Products;
 using huzcodes.Extensions.Exceptions;
 using huzcodes.Persistence.Interfaces.Repositories;
@@ -105,7 +104,6 @@ namespace CraftIQ.Inventory.Services.ProductsImplementations
 
             else throw new ResultException("This object is not exit", (int)HttpStatusCode.NotFound);
         }
-
         public async ValueTask Update(Guid categoryId, TRequest contract)
         {
             var oContract = contract as ProductsOperationsContract;
@@ -118,6 +116,77 @@ namespace CraftIQ.Inventory.Services.ProductsImplementations
             }
 
             else throw new ResultException("This object is not exit", (int)HttpStatusCode.NotFound);
+        }
+
+        public async ValueTask<List<TResponse>> ReadByParentId(Guid parentContractId)
+        {
+            var oReadCategoriesByIdSpecification = new ReadProductsByCategoryIdSpecification(parentContractId);
+            var oCategoryResult = await _categoryRepository.FirstOrDefaultAsync(oReadCategoriesByIdSpecification);
+            if (oCategoryResult != null) 
+            {
+                var oProducts = oCategoryResult.Products;
+                var oResult = oProducts.Select(o => new ProductsContract(o._ProductId,
+                                                                         oCategoryResult._CategoryId,
+                                                                         Guid.Empty,
+                                                                         o.Name,
+                                                                         o.Description,
+                                                                         o.UnitPrice,
+                                                                         o.Weight,
+                                                                         o.Length,
+                                                                         o.Width,
+                                                                         o.Height,
+                                                                         o.TaxCost,
+                                                                         o.ProfitPerUnit,
+                                                                         o.ProductionCost)).ToList();
+                return oResult as dynamic;
+            }
+
+            return new List<ProductsContract>() as dynamic;
+        }
+
+        public async ValueTask<TResponse> ReadSingleByParentId(Guid contractId, Guid parentContractId)
+        {
+            var oReadSingleProductByCategoryIdSpecification = new ReadSingleProductByCategoryIdSpecification(contractId, parentContractId);
+            var oCategoryResult = await _categoryRepository.FirstOrDefaultAsync(oReadSingleProductByCategoryIdSpecification);
+            if (oCategoryResult != null)
+            {
+                if(oCategoryResult.Products == null || oCategoryResult.Products.Count == 0)
+                    throw new ResultException("This object is not exit", (int)HttpStatusCode.NotFound);
+
+                var oProduct = oCategoryResult.Products.FirstOrDefault();
+                var oResult = new ProductsContract(oProduct!._ProductId,
+                                                   oCategoryResult._CategoryId,
+                                                   Guid.Empty,
+                                                   oProduct.Name,
+                                                   oProduct.Description,
+                                                   oProduct.UnitPrice,
+                                                   oProduct.Weight,
+                                                   oProduct.Length,
+                                                   oProduct.Width,
+                                                   oProduct.Height,
+                                                   oProduct.TaxCost,
+                                                   oProduct.ProfitPerUnit,
+                                                   oProduct.ProductionCost);
+                return oResult as dynamic;
+            }
+
+            return default!;
+        }
+
+        public async ValueTask UpdateParentId(Guid contractId, Guid parentContractId)
+        {
+            var oReadByIdSpec = new ReadProductsByIdSpecification(contractId);
+            var oResult = await _productRepository.FirstOrDefaultAsync(oReadByIdSpec);
+            if (oResult == null)
+                throw new ResultException("This product object is not exit", (int)HttpStatusCode.NotFound);
+
+            var oReadParentByIdSpec = new ReadCategoriesByIdSpecification(parentContractId);
+            var oParentResult = await _categoryRepository.FirstOrDefaultAsync(oReadParentByIdSpec);
+            if(oParentResult == null)
+                throw new ResultException("This category object is not exit", (int)HttpStatusCode.NotFound);
+
+            oResult.SetCategory(oParentResult);
+            await _productRepository.UpdateAsync(oResult);
         }
     }
 }
