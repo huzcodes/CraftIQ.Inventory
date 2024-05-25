@@ -40,6 +40,8 @@ CraftIQ.Inventory is a microservice dedicated to handling inventory management w
 
 [![Watch Building CraftIQ.Inventory microservice Part 5 session' video in Arabic](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=NxRdl0pHb_w)
 
+[![Watch Building CraftIQ.Inventory microservice Part 6 session' video in Arabic](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=bkCTnAxvCks)
+
 
 ## Installation
 
