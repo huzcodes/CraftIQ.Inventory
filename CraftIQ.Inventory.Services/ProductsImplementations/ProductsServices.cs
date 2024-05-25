@@ -104,10 +104,10 @@ namespace CraftIQ.Inventory.Services.ProductsImplementations
 
             else throw new ResultException("This object is not exit", (int)HttpStatusCode.NotFound);
         }
-        public async ValueTask Update(Guid categoryId, TRequest contract)
+        public async ValueTask Update(Guid contractId, TRequest contract)
         {
             var oContract = contract as ProductsOperationsContract;
-            var oReadByIdSpec = new ReadProductsByIdSpecification(categoryId);
+            var oReadByIdSpec = new ReadProductsByIdSpecification(contractId);
             var oResult = await _productRepository.FirstOrDefaultAsync(oReadByIdSpec);
             if (oResult != null)
             {
