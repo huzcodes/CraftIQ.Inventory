@@ -37,6 +37,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CraftIQ.Inventory.Aspire\CraftIQ.Inventory.Aspire.ServiceDefaults\CraftIQ.Inventory.Aspire.ServiceDefaults.csproj" />
     <ProjectReference Include="..\CraftIQ.Inventory.Infrastructure\CraftIQ.Inventory.Infrastructure.csproj" />
     <ProjectReference Include="..\CraftIQ.Inventory.Services\CraftIQ.Inventory.Services.csproj" />
   </ItemGroup>
