@@ -12,7 +12,7 @@ namespace CraftIQ.Inventory.Infrastructure.Data
 
         // db sets lands here
         public DbSet<Category> Categories => Set<Category>();
-        public DbSet<Core.Entities.Inventory> Inventories => Set<Core.Entities.Inventory>();
+        public DbSet<Core.Entities.Inventories.Inventory> Inventories => Set<Core.Entities.Inventories.Inventory>();
         public DbSet<Order> Orders => Set<Order>();
         public DbSet<OrderDetail> OrderDetails => Set<OrderDetail>();
         public DbSet<Product> Products => Set<Product>();
