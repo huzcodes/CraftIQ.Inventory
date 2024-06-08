@@ -21,5 +21,13 @@
             public const string ReadSingleByCategoryId = CategoriesRoutes.ReadById + ReadById;
             public const string UpdateProductCategoryId = CategoriesRoutes.BaseUrl + ReadById;
         }
+
+        public class InventoryRoutes
+        {
+            public const string BaseUrl = "/inventories";
+            public const string ReadById = BaseUrl + "/{inventoryId}";
+            public const string Update = BaseUrl + "/{inventoryId}";
+            public const string Delete = BaseUrl + "/{inventoryId}";
+        }
     }
 }
