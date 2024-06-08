@@ -43,6 +43,7 @@ namespace CraftIQ.Inventory.Core.Entities.Inventories
             Quantity = inventory.Quantity == 0 ? this.Quantity : inventory.Quantity;
             Reorderlevel = inventory.Reorderlevel == 0 ? this.Reorderlevel : inventory.Reorderlevel;
             Location = string.IsNullOrEmpty(inventory.Location) ? this.Location : inventory.Location;
+            Name = string.IsNullOrEmpty(inventory.Name) ? this.Name : inventory.Name;
         }
     }
 }
