@@ -16,7 +16,8 @@ namespace CraftIQ.Inventory.Services.InventoryImplementations
             var oData = new Core.Entities.Inventories.Inventory(oContract!.Quantity,
                                                                 oContract.Reorderlevel,
                                                                 oContract.Location,
-                                                                oContract.LastUpdated);
+                                                                oContract.LastUpdated,
+                                                                oContract.Name);
             var oResult = await _repository.AddAsync(oData);
             if (oResult == null)
                 return default!;
@@ -41,6 +42,7 @@ namespace CraftIQ.Inventory.Services.InventoryImplementations
             if (oData != null && oData.Count > 0)
             {
                 var oResult = oData.Select(o => new InventoriesContract(o._InventoryId,
+                                                                        o.Name,
                                                                         o.Quantity,
                                                                         o.Reorderlevel,
                                                                         o.Location,
@@ -59,6 +61,7 @@ namespace CraftIQ.Inventory.Services.InventoryImplementations
             var oResult = await _repository.FirstOrDefaultAsync(oReadByIdSpec);
             if (oResult != null)
                 return new InventoriesContract(oResult._InventoryId,
+                                               oResult.Name,
                                                oResult.Quantity,
                                                oResult.Reorderlevel,
                                                oResult.Location,

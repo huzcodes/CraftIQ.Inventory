@@ -1,8 +1,10 @@
 ﻿using CraftIQ.Inventory.Core.Entities.Categories;
 using CraftIQ.Inventory.Core.Entities.Categories.Specifications;
+using CraftIQ.Inventory.Core.Entities.Inventories.Specifications;
 using CraftIQ.Inventory.Core.Entities.Products;
 using CraftIQ.Inventory.Core.Entities.Products.Specifications;
 using CraftIQ.Inventory.Core.Interfaces;
+using CraftIQ.Inventory.Shared.Contracts.Inventories;
 using CraftIQ.Inventory.Shared.Contracts.Products;
 using huzcodes.Extensions.Exceptions;
 using huzcodes.Persistence.Interfaces.Repositories;
@@ -11,17 +13,27 @@ using System.Net;
 namespace CraftIQ.Inventory.Services.ProductsImplementations
 {
     public class ProductsServices<TRequest, TResponse>
-                 (IRepository<Category> categoryRepository, IRepository<Product> productRepository) : IGenericServices<TRequest, TResponse>
+                 (IRepository<Category> categoryRepository, 
+                  IRepository<Product> productRepository,
+                  IRepository<Core.Entities.Inventories.Inventory> inventoryRepository) : IGenericServices<TRequest, TResponse>
     {
         private readonly IRepository<Category> _categoryRepository = categoryRepository;
         private readonly IRepository<Product> _productRepository = productRepository;
+        private readonly IRepository<Core.Entities.Inventories.Inventory> _inventoryRepository = inventoryRepository;
         public async ValueTask<TRequest> Create(TRequest contract)
         {
             var oContract = contract as ProductsOperationsContract;
+            // Category 
             var oCategoryReadByIdSpec = new ReadCategoriesByIdSpecification(oContract!._CategoryId);
             var oCategory = await _categoryRepository.FirstOrDefaultAsync(oCategoryReadByIdSpec);
             if (oCategory == null)
                 throw new ResultException("you can't add product in category that not exist!", (int)HttpStatusCode.NotFound);
+
+            // Inventory
+            var oInventoryReadByIdSpec = new ReadInventoryByIdSpecification(oContract!._InventoryId);
+            var oInventory = await _inventoryRepository.FirstOrDefaultAsync(oInventoryReadByIdSpec);
+            if (oInventory == null)
+                throw new ResultException("you can't add product that doesn't exist at an inventory!", (int)HttpStatusCode.NotFound);
 
             var oProducts = new Product(oContract.Name,
                                         oContract.Description,
@@ -34,6 +46,7 @@ namespace CraftIQ.Inventory.Services.ProductsImplementations
                                         oContract.ProfitPerUnit,
                                         oContract.ProductionCost);
             oProducts.SetCategory(oCategory);
+            oProducts.SetInventory(oInventory);
             var oProductResult = await _productRepository.AddAsync(oProducts);
             if (oProductResult == null)
                 return default!;
@@ -59,7 +72,7 @@ namespace CraftIQ.Inventory.Services.ProductsImplementations
             {
                 var oResult = oData.Select(o => new ProductsContract(o._ProductId,
                                                                      Guid.Empty,
-                                                                     Guid.Empty,
+                                                                     o.Inventory._InventoryId,
                                                                      o.Name,
                                                                      o.Description,
                                                                      o.UnitPrice,
@@ -73,7 +86,9 @@ namespace CraftIQ.Inventory.Services.ProductsImplementations
                                                                      o.CreatedBy,
                                                                      o.ModifiedBy,
                                                                      o.CreatedOn,
-                                                                     o.ModifiedOn)).ToList();
+                                                                     o.ModifiedOn,
+                                                                     o.Inventory.Quantity,
+                                                                     o.Inventory.Reorderlevel)).ToList();
                 return oResult as dynamic;
             }
             else return new List<ProductsContract>() as dynamic;
@@ -86,7 +101,7 @@ namespace CraftIQ.Inventory.Services.ProductsImplementations
             if (oResult != null)
                 return new ProductsContract(oResult._ProductId,
                                             Guid.Empty,
-                                            Guid.Empty,
+                                            oResult.Inventory._InventoryId,
                                             oResult.Name,
                                             oResult.Description,
                                             oResult.UnitPrice,
@@ -100,7 +115,9 @@ namespace CraftIQ.Inventory.Services.ProductsImplementations
                                             oResult.CreatedBy,
                                             oResult.ModifiedBy,
                                             oResult.CreatedOn,
-                                            oResult.ModifiedOn) as dynamic;
+                                            oResult.ModifiedOn,
+                                            oResult.Inventory.Quantity,
+                                            oResult.Inventory.Reorderlevel) as dynamic;
 
             else throw new ResultException("This object is not exit", (int)HttpStatusCode.NotFound);
         }

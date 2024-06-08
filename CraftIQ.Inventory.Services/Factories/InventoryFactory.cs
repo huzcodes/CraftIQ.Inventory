@@ -20,7 +20,7 @@ namespace CraftIQ.Inventory.Services.Factories
                 case nameof(Category):
                     return new CategoriesServices<TRequest, TResponse>(_categoryRepository);
                 case nameof(Product):
-                    return new ProductsServices<TRequest, TResponse>(_categoryRepository, _productRepository);
+                    return new ProductsServices<TRequest, TResponse>(_categoryRepository, _productRepository, _inventoryRepository);
                 case nameof(Core.Entities.Inventories.Inventory):
                     return new InventoryServices<TRequest, TResponse>(_inventoryRepository);
                 default: return null!;
