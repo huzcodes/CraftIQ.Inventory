@@ -55,10 +55,17 @@ namespace CraftIQ.Inventory.Core.Entities.Products
             TaxCost = taxCost;
             ProfitPerUnit = profitPerUnit;
             ProductionCost = productionCost;
+            CreatedBy = new();
+            CreatedOn = DateTimeOffset.Now;
+            ModifiedBy = new();
+            ModifiedOn = DateTimeOffset.Now;
         }
 
         public void SetCategory(Category category) =>
             Category = category;
+
+        public void SetInventory(Inventories.Inventory inventory) =>
+            Inventory = inventory;
 
         public void UpdateProduct(ProductsOperationsContract product)
         {
