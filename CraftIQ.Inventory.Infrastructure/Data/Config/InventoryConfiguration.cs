@@ -12,6 +12,9 @@ namespace CraftIQ.Inventory.Infrastructure.Data.Config
 
             builder.Property(p => p.Location)
                    .HasMaxLength(200);
+
+            builder.Property(p => p.Name)
+                   .HasMaxLength(50);
         }
     }
 }
