@@ -24,7 +24,7 @@ namespace CraftIQ.Inventory.Core.Entities.Products
 
         //relation with Inventory
         public int InventoryId { get; set; }
-        public Inventory Inventory { get; set; } = new();
+        public Core.Entities.Inventories.Inventory Inventory { get; set; } = new();
 
         //relation with Transactions
         public int TransactionId { get; set; }
