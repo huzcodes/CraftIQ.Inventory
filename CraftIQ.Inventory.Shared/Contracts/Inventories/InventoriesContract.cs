@@ -7,6 +7,7 @@
         public DateTimeOffset CreatedOn { get; set; }
         public DateTimeOffset ModifiedOn { get; set; }
         public InventoriesContract(Guid inventoryId,
+                                   string name,
                                    int quantity,
                                    int reorderlevel,
                                    string location,
@@ -14,6 +15,7 @@
                                    Guid modifiedBy,
                                    DateTimeOffset createdOn,
                                    DateTimeOffset modifiedOn) : base(inventoryId,
+                                                                     name,
                                                                      quantity,
                                                                      reorderlevel,
                                                                      location)
