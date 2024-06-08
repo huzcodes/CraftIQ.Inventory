@@ -14,7 +14,7 @@ namespace CraftIQ.Inventory.API.Endpoints.Inventories.Create
         public override async Task<ActionResult<CreateInventoryResponse>> HandleAsync([FromBody] CreateInventoryRequest request, CancellationToken cancellationToken = default)
         {
             var service = _factory.Build(nameof(Inventory));
-            var oData = new InventoriesOperationsContract(Guid.Empty, request.Quantity, request.Reorderlevel, request.Location);
+            var oData = new InventoriesOperationsContract(Guid.Empty, request.Name, request.Quantity, request.Reorderlevel, request.Location);
             var oCreateInventory = await service.Create(oData);
             var oResult = new CreateInventoryResponse(oCreateInventory._InventoryId);
             return Ok(oResult);

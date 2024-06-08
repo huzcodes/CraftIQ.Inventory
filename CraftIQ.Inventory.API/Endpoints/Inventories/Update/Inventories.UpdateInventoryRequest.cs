@@ -15,6 +15,7 @@ namespace CraftIQ.Inventory.API.Endpoints.Inventories.Update
         public int Quantity { get; set; }
         public int Reorderlevel { get; set; }
         public string Location { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
     }
 
 }

@@ -16,6 +16,7 @@ namespace CraftIQ.Inventory.API.Endpoints.Inventories.Update
         {
             var service = _factory.Build(nameof(Inventory));
             var oData = new InventoriesOperationsContract(request.inventoryId,
+                                                          request.Inventory.Name,
                                                           request.Inventory.Quantity,
                                                           request.Inventory.Reorderlevel,
                                                           request.Inventory.Location);
