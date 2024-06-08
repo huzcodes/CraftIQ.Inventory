@@ -7,6 +7,7 @@ namespace CraftIQ.Inventory.Core.Entities.Inventories
     {
         public Inventory() { }// for entity framework
 
+        public string Name { get; set; } = string.Empty;
         public Guid _InventoryId { get; set; }
         public int Quantity { get; set; }
         public int Reorderlevel { get; set; }
@@ -19,13 +20,19 @@ namespace CraftIQ.Inventory.Core.Entities.Inventories
         public Inventory(int quantity,
                          int reorderlevel,
                          string location,
-                         DateTimeOffset lastUpdated)
+                         DateTimeOffset lastUpdated,
+                         string name)
         {
             _InventoryId = Guid.NewGuid();
             Quantity = quantity;
             Reorderlevel = reorderlevel;
             Location = location;
             LastUpdated = lastUpdated;
+            Name = name;
+            CreatedBy = new();
+            CreatedOn = DateTimeOffset.Now;
+            ModifiedBy = new();
+            ModifiedOn = DateTimeOffset.Now;
         }
 
 
