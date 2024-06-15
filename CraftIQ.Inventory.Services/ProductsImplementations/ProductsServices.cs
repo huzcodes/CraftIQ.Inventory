@@ -3,8 +3,9 @@ using CraftIQ.Inventory.Core.Entities.Categories.Specifications;
 using CraftIQ.Inventory.Core.Entities.Inventories.Specifications;
 using CraftIQ.Inventory.Core.Entities.Products;
 using CraftIQ.Inventory.Core.Entities.Products.Specifications;
+using CraftIQ.Inventory.Core.Entities.Transactions;
+using CraftIQ.Inventory.Core.Entities.Transactions.Specifications;
 using CraftIQ.Inventory.Core.Interfaces;
-using CraftIQ.Inventory.Shared.Contracts.Inventories;
 using CraftIQ.Inventory.Shared.Contracts.Products;
 using huzcodes.Extensions.Exceptions;
 using huzcodes.Persistence.Interfaces.Repositories;
@@ -15,11 +16,13 @@ namespace CraftIQ.Inventory.Services.ProductsImplementations
     public class ProductsServices<TRequest, TResponse>
                  (IRepository<Category> categoryRepository, 
                   IRepository<Product> productRepository,
-                  IRepository<Core.Entities.Inventories.Inventory> inventoryRepository) : IGenericServices<TRequest, TResponse>
+                  IRepository<Core.Entities.Inventories.Inventory> inventoryRepository,
+                  IRepository<Transaction> transactionRepository) : IGenericServices<TRequest, TResponse>
     {
         private readonly IRepository<Category> _categoryRepository = categoryRepository;
         private readonly IRepository<Product> _productRepository = productRepository;
         private readonly IRepository<Core.Entities.Inventories.Inventory> _inventoryRepository = inventoryRepository;
+        private readonly IRepository<Transaction> _transactionRepository = transactionRepository;
         public async ValueTask<TRequest> Create(TRequest contract)
         {
             var oContract = contract as ProductsOperationsContract;
@@ -35,6 +38,13 @@ namespace CraftIQ.Inventory.Services.ProductsImplementations
             if (oInventory == null)
                 throw new ResultException("you can't add product that doesn't exist at an inventory!", (int)HttpStatusCode.NotFound);
 
+            // Transaction
+            var oTransactionReadByIdSpec = new ReadTransactionsByIdSpecification(oContract!._TransactionId);
+            var oTransaction = await _transactionRepository.FirstOrDefaultAsync(oTransactionReadByIdSpec);
+            if (oTransaction == null)
+                throw new ResultException("you must start a transaction before you add product!", (int)HttpStatusCode.NotFound);
+
+
             var oProducts = new Product(oContract.Name,
                                         oContract.Description,
                                         oContract.UnitPrice,
@@ -47,6 +57,7 @@ namespace CraftIQ.Inventory.Services.ProductsImplementations
                                         oContract.ProductionCost);
             oProducts.SetCategory(oCategory);
             oProducts.SetInventory(oInventory);
+            oProducts.SetTransaction(oTransaction);
             var oProductResult = await _productRepository.AddAsync(oProducts);
             if (oProductResult == null)
                 return default!;
@@ -73,6 +84,7 @@ namespace CraftIQ.Inventory.Services.ProductsImplementations
                 var oResult = oData.Select(o => new ProductsContract(o._ProductId,
                                                                      Guid.Empty,
                                                                      o.Inventory._InventoryId,
+                                                                     o.Transaction._TransactionId,
                                                                      o.Name,
                                                                      o.Description,
                                                                      o.UnitPrice,
@@ -102,6 +114,7 @@ namespace CraftIQ.Inventory.Services.ProductsImplementations
                 return new ProductsContract(oResult._ProductId,
                                             Guid.Empty,
                                             oResult.Inventory._InventoryId,
+                                            oResult.Transaction._TransactionId,
                                             oResult.Name,
                                             oResult.Description,
                                             oResult.UnitPrice,
@@ -145,6 +158,7 @@ namespace CraftIQ.Inventory.Services.ProductsImplementations
                 var oResult = oProducts.Select(o => new ProductsContract(o._ProductId,
                                                                          oCategoryResult._CategoryId,
                                                                          Guid.Empty,
+                                                                         Guid.Empty,
                                                                          o.Name,
                                                                          o.Description,
                                                                          o.UnitPrice,
@@ -173,6 +187,7 @@ namespace CraftIQ.Inventory.Services.ProductsImplementations
                 var oProduct = oCategoryResult.Products.FirstOrDefault();
                 var oResult = new ProductsContract(oProduct!._ProductId,
                                                    oCategoryResult._CategoryId,
+                                                   Guid.Empty,
                                                    Guid.Empty,
                                                    oProduct.Name,
                                                    oProduct.Description,
