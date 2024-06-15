@@ -1,6 +1,7 @@
 ﻿using CraftIQ.Inventory.Core.Entities;
 using CraftIQ.Inventory.Core.Entities.Categories;
 using CraftIQ.Inventory.Core.Entities.Products;
+using CraftIQ.Inventory.Core.Entities.Transactions;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
