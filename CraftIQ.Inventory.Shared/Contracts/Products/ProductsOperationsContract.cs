@@ -5,6 +5,7 @@
         public Guid _ProductId { get; set; }
         public Guid _CategoryId { get; set; }
         public Guid _InventoryId { get; set; }
+        public Guid _TransactionId { get; set; }
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public decimal UnitPrice { get; set; }
@@ -18,6 +19,7 @@
         public ProductsOperationsContract(Guid productId,
                                           Guid categoryId,
                                           Guid inventoryId,
+                                          Guid transactionId,
                                           string name,
                                           string description,
                                           decimal unitPrice,
@@ -32,6 +34,7 @@
             _ProductId = productId;
             _CategoryId = categoryId;
             _InventoryId = inventoryId;
+            _TransactionId = transactionId;
             Name = name;
             Description = description;
             UnitPrice = unitPrice;
