@@ -20,6 +20,7 @@ namespace CraftIQ.Inventory.API.Endpoints.Products.Create
             var oData = new ProductsOperationsContract(Guid.Empty,
                                                        request.CategoryId,
                                                        request.InventoryId,
+                                                       request.TransactionId,
                                                        request.Name,
                                                        request.Description,
                                                        request.UnitPrice,

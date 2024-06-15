@@ -4,6 +4,7 @@
     {
         public Guid CategoryId { get; set; }
         public Guid InventoryId { get; set; }
+        public Guid TransactionId { get; set; }
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public decimal UnitPrice { get; set; }
@@ -17,6 +18,7 @@
 
         public CreateProductRequest(Guid categoryId,
                                     Guid inventoryId,
+                                    Guid transactionId,
                                     string name,
                                     string description,
                                     decimal unitPrice,
@@ -30,6 +32,7 @@
         {
             CategoryId = categoryId;
             InventoryId = inventoryId;
+            TransactionId = transactionId;
             Name = name;
             Description = description;
             UnitPrice = unitPrice;

@@ -16,6 +16,7 @@ namespace CraftIQ.Inventory.API.Endpoints.Products.Read
         public decimal ProfitPerUnit { get; set; }
         public decimal ProductionCost { get; set; }
         public Guid InventoryId { get; set; }
+        public Guid TransactionId { get; set; }
         public int Quantity { get; set; }
         public int ReorderLevel { get; set; }
         public Guid CreatedBy { get; set; }
@@ -36,6 +37,7 @@ namespace CraftIQ.Inventory.API.Endpoints.Products.Read
             ProfitPerUnit = product.ProfitPerUnit;
             ProductionCost = product.ProductionCost;
             InventoryId = product.InventoryId;
+            TransactionId = product._TransactionId;
             Quantity = product.Quantity;
             ReorderLevel = product.ReorderLevel;
             CreatedBy = product.CreatedBy;
