@@ -1,6 +1,6 @@
 ﻿using CraftIQ.Inventory.Core.Entities.Categories;
+using CraftIQ.Inventory.Core.Entities.Transactions;
 using CraftIQ.Inventory.Shared.Contracts.Products;
-using Microsoft.IdentityModel.Tokens;
 
 namespace CraftIQ.Inventory.Core.Entities.Products
 {
@@ -66,6 +66,9 @@ namespace CraftIQ.Inventory.Core.Entities.Products
 
         public void SetInventory(Inventories.Inventory inventory) =>
             Inventory = inventory;
+
+        public void SetTransaction(Transaction transaction) =>
+            Transaction = transaction;
 
         public void UpdateProduct(ProductsOperationsContract product)
         {
