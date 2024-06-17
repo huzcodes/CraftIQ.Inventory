@@ -1,4 +1,5 @@
 ﻿using CraftIQ.Inventory.Core.Entities.Categories;
+using CraftIQ.Inventory.Core.Entities.OrderDetails;
 using CraftIQ.Inventory.Core.Entities.Transactions;
 using CraftIQ.Inventory.Shared.Contracts.Products;
 
