@@ -1,5 +1,6 @@
-﻿using CraftIQ.Inventory.Core.Entities;
-using CraftIQ.Inventory.Core.Entities.Categories;
+﻿using CraftIQ.Inventory.Core.Entities.Categories;
+using CraftIQ.Inventory.Core.Entities.OrderDetails;
+using CraftIQ.Inventory.Core.Entities.Orders;
 using CraftIQ.Inventory.Core.Entities.Products;
 using CraftIQ.Inventory.Core.Entities.Transactions;
 using Microsoft.EntityFrameworkCore;
