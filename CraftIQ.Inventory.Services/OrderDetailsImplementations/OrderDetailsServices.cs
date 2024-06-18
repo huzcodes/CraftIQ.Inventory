@@ -40,6 +40,9 @@ namespace CraftIQ.Inventory.Services.OrderDetailsImplementations
             var oOrderDetail = new OrderDetail(oContract.Quantity,
                                                oContract.TotalPrice);
 
+            oOrderDetail.SetOrder(oOrder);
+            oOrderDetail.SetProduct(oProduct);
+
             var oOrderDetailResult = await _orderDetailRepository.AddAsync(oOrderDetail);
             if (oOrderDetailResult == null)
                 return default!;
